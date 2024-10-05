@@ -25,6 +25,14 @@ export default async function handler(req, res) {
           console.log("Runner stopped");
           runner = null; // Reset runner
         });
+        // Ensure the runner is stopped when the process exits
+        process.on("exit", () => {
+          if (runner) {
+            console.log("Stopping runner on process exit");
+            runner.stop(); // Assuming runner has a stop method
+            runner = null;
+          }
+        });
       } else {
         res.status(200).json({ message: "Runner is already running" });
       }

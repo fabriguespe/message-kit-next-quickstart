@@ -9,8 +9,11 @@ function StartRunnerButton() {
 
   const startRunner = async () => {
     try {
-      const wallet = new Wallet(process.env.NEXT_PUBLIC_KEY);
-      setMsg(`Send you first message to address : ${wallet.address}`);
+      const addressResponse = await fetch("/api/getAddress", {
+        method: "POST",
+      });
+      const address = await addressResponse.json();
+      setMsg(`Send you first message to address : ${address.address}`);
       const response = await fetch("/api/startRunner", {
         method: "POST",
       });
