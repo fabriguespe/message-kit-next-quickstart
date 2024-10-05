@@ -19,6 +19,12 @@ export default async function handler(req, res) {
           res.status(200).json({ message: `New message received: ${text}` });
           await context.send("gm");
         });
+
+        // Add a listener to reset the runner when it stops
+        runner.on("end", () => {
+          console.log("Runner stopped");
+          runner = null; // Reset runner
+        });
       } else {
         res.status(200).json({ message: "Runner is already running" });
       }
