@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@xmtp/message-kit": "^0.0.24-beta.0",
+    "dotenv": "^16.4.5",
+    "ethers": "^6.13.3",
     "next": "14.2.14",
     "react": "^18",
     "react-dom": "^18"

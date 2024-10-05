@@ -1,16 +1,23 @@
 "use client";
-import Image from "next/image";
+import { useState } from "react";
 import styles from "./page.module.css";
+import { Wallet } from "ethers";
 
 function StartRunnerButton() {
+  require("dotenv").config();
+  const [msg, setMsg] = useState(null); // State to store the address
+
   const startRunner = async () => {
     try {
+      const wallet = new Wallet(process.env.NEXT_PUBLIC_KEY);
+      setMsg(`Send you first message to ${wallet.address}`);
+
       const response = await fetch("/api/startRunner", {
         method: "POST",
       });
       const data = await response.json();
       if (response.ok) {
-        console.log(data.message);
+        setMsg(data.message);
       } else {
         console.error(data.error);
       }
@@ -20,16 +27,12 @@ function StartRunnerButton() {
   };
 
   return (
-    <button className={styles.primary} onClick={startRunner}>
-      <Image
-        className={styles.logo}
-        src="https://nextjs.org/icons/vercel.svg"
-        alt="Vercel logomark"
-        width={20}
-        height={20}
-      />
-      Start runner
-    </button>
+    <div className={styles.align}>
+      <button className={styles.primary} onClick={startRunner}>
+        Start runner
+      </button>
+      <label>{msg && <p> {msg}</p>}</label>
+    </div>
   );
 }
 
@@ -37,36 +40,13 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.js</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+        <h1>MessageKit</h1>
+        <h4>SDK for building messaging mini apps</h4>
 
         <div className={styles.ctas}>
-          <StartRunnerButton /> {/* Use the new Client Component here */}
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+          <StartRunnerButton />
         </div>
       </main>
-      <footer className={styles.footer}>
-        {/* ... existing footer code ... */}
-      </footer>
     </div>
   );
 }

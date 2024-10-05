@@ -83,6 +83,12 @@ a.primary {
   color: var(--background);
   gap: 8px;
 }
+.align {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
 
 a.secondary {
   border-color: var(--gray-alpha-200);
@@ -162,4 +168,9 @@ a.secondary {
   .logo {
     filter: invert();
   }
+}
+.primary {
+  /* Existing styles */
+  width: 200px; /* Set your desired fixed width */
+  /* Other styles */
 }
