@@ -10,8 +10,7 @@ function StartRunnerButton() {
   const startRunner = async () => {
     try {
       const wallet = new Wallet(process.env.NEXT_PUBLIC_KEY);
-      setMsg(`Send you first message to ${wallet.address}`);
-
+      setMsg(`Send you first message to address : ${wallet.address}`);
       const response = await fetch("/api/startRunner", {
         method: "POST",
       });
@@ -31,7 +30,7 @@ function StartRunnerButton() {
       <button className={styles.primary} onClick={startRunner}>
         Start runner
       </button>
-      <label>{msg && <p> {msg}</p>}</label>
+      <label className={styles.fixedLabel}>{msg && <p> {msg}</p>}</label>
     </div>
   );
 }

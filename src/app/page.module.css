@@ -174,3 +174,10 @@ a.secondary {
   width: 200px; /* Set your desired fixed width */
   /* Other styles */
 }
+
+.fixedLabel {
+  text-align: left;
+  width: 1000px; /* Set your desired fixed width */
+  display: block; /* Ensure the label takes up the fixed width */
+  /* Add any additional styles as needed */
+}
